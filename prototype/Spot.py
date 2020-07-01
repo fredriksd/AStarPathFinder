@@ -3,26 +3,35 @@ from random import random
 import pygame
 
 class Spot:
-    def __init__(self, screen, x, y):
+    def __init__(self, screen, i, j):
         self.screen     = screen
-        self.x          = x
-        self.y          = y
+        self.i          = i
+        self.j          = j
         self.neighbors  = []
         
 
     def show(self, color):
-        if (self.x == 0 and self.y == 0):
-            self.screen.updateGrid(self.x, self.y, pygame.Color("green"))
-        self.screen.updateGrid(self.x, self.y, color)
+        if (self.i == 0 and self.j == 0):
+            self.screen.updateGrid(self.i, self.j, pygame.Color("green"))
+        self.screen.updateGrid(self.i, self.j, color)
 
     def addNeigbors(self, grid, cols, rows):
-        x = self.x
-        y = self.y
-        if (x < cols - 1):
-            self.neighbors.append(grid[x + 1][y])
-        if (x > 0):
-            self.neighbors.append(grid[x - 1][y])
-        if (y < rows - 1):
-            self.neighbors.append(grid[x][y + 1])
-        if (y > 0):
-            self.neighbors.append(grid[x][y - 1])
+        i = self.i
+        j = self.j
+        if (i < cols - 1):
+            self.neighbors.append(grid[i + 1][j])
+        if (i > 0):
+            self.neighbors.append(grid[i - 1][j])
+        if (j < rows - 1):
+            self.neighbors.append(grid[i][j + 1])
+        if (j > 0):
+            self.neighbors.append(grid[i][j - 1])
+        if (i > 0 and j > 0):
+            self.neighbors.append(grid[i - 1][j - 1])
+        if (i < cols - 1 and j > 0):
+            self.neighbors.append(grid[i + 1][j - 1])
+        if (i > 0 and j < rows - 1):
+            self.neighbors.append(grid[i - 1][j + 1])
+        if (i < cols - 1 and j < rows - 1):
+            self.neighbors.append(grid[i + 1 ][j + 1])
+        

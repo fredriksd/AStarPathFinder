@@ -14,7 +14,7 @@ class Screen:
         pygame.display.flip()
     
     def makeGrid(self):
-        w, h = self.size[0]/self.rowsCols, self.size[1]/self.rowsCols
+        w, h = self.size[0]//self.rowsCols, self.size[1]//self.rowsCols
         for i in range(self.size[0]):
             for j in range(self.size[1]):
                 pygame.draw.rect(self.screen, pygame.Color("white"), 
