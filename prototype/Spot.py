@@ -8,12 +8,13 @@ class Spot:
         self.i          = i
         self.j          = j
         self.neighbors  = []
-        
+        self.obstacle   = True if random() > 0.5 else False
 
     def show(self, color):
-        if (self.i == 0 and self.j == 0):
-            self.screen.updateGrid(self.i, self.j, pygame.Color("green"))
         self.screen.updateGrid(self.i, self.j, color)
+
+    def isObstacle(self):
+        return self.obstacle == True
 
     def addNeigbors(self, grid, cols, rows):
         i = self.i

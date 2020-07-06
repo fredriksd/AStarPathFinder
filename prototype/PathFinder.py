@@ -14,19 +14,11 @@ class PathFinder:
         self.grid      = grid
         self.stop      = stop
         self.openSet   = [start]
-        #self.closedSet = []
         self.previous  = {}
         self.fScore    = {start : self.heuristic(start)}
         self.gScore    = {start : 0}
         self.path      = []
         self.found     = False
-
-    """def reconstructPath(self, cameFromSet, currentSpot):
-        total_path = [currentSpot]
-        for i in range(len(cameFromSet), 0, -1):
-            total_path.append(cameFromSet[i])
-        return total_path
-    """
     
     def reconstructPath(self, cameFromSet, currentSpot):
         total_path = [currentSpot]
@@ -48,7 +40,7 @@ class PathFinder:
     def showPath(self):
         for spot in self.path:
             spot.show(Color("blue"))
-    
+
     def findPath(self):
         if(not self.found):
             while (len(self.openSet) > 0):
@@ -67,6 +59,9 @@ class PathFinder:
                         
                 neighbors = current.neighbors
                 for neighbor in neighbors:
+                    if(neighbor.isObstacle()):
+                        neighbor.show(Color("white"))
+                        continue
                     if(neighbor not in self.gScore.keys()):
                         self.gScore[neighbor] = 10000
                     tempGScore = self.gScore[current] + self.dist(current, neighbor)

@@ -9,7 +9,7 @@ import pygame
 
 def main():
     cols, rows = 10, 10
-    screen = Screen(400, 400, rows)
+    screen = Screen(500, 500, rows)
     screen.show()
     screen.makeGrid()
     
@@ -26,8 +26,10 @@ def main():
         for j in range(0, rows):
             grid[i][j].addNeigbors(grid, cols, rows)
 
-    start = grid[0][0]
+    start = grid[0][rows - 2]
+    start.obstacle = False
     stop = grid[cols - 1][rows - 1]
+    stop.obstacle = False
 
     pathFinder = PathFinder(grid, start, stop)
     
