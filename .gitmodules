@@ -2,3 +2,7 @@
 	path = product/googletest
 	url = https://github.com/google/googletest.git
         ignore = dirty
+[submodule "PlanGenerator/googletest"]
+	path = PlanGenerator/googletest
+	url = https://github.com/google/googletest.git
+        ignore = dirty
