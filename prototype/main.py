@@ -15,13 +15,6 @@ def main():
     
     grid = [[Spot(screen, i, j) for j in range(0, rows)] for i in range(0, cols)]
 
-    """grid = []
-    for i in range(0, cols):
-        preList = []
-        for j in range(0, rows):
-            preList.append(Spot(screen, i, j))
-        grid.append(preList)            
-    """
     for i in range(0, cols):
         for j in range(0, rows):
             grid[i][j].addNeigbors(grid, cols, rows)
