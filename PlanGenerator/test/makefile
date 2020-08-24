@@ -1,8 +1,5 @@
-vpath %.cpp source test
-vpath %.h source
-
-GTEST_DIR = googletest/googletest
-GMOCK_DIR = googletest/googlemock
+GTEST_DIR = ../googletest/googletest
+GMOCK_DIR = ../googletest/googlemock
 
 GTEST_HEADERS = ${GTEST_DIR}/include/gtest/*.h \
 		${GTEST_DIR}/include/gtest/internal/*.h 
@@ -24,8 +21,9 @@ x: PlanGeneratorTest.o PlanGenerator.o gtest_main.a gmock_main.a
 PlanGeneratorTest.o: PlanGeneratorTest.cpp
 	$(CXX) -c ${CPPFLAGS} $<
 
-PlanGenerator.o: PlanGenerator.cpp PlanGenerator.h
-	$(CXX) -c ${CPPFLAGS} $<
+PlanGenerator.o:
+	$(MAKE) -C ../source pkg
+	cp ../source/PlanGenerator.o .
 
 
 gtest-all.o: $(GTEST_SRCS_)
@@ -52,4 +50,5 @@ gtest_main.a: gtest-all.o gtest_main.o
 .PHONY: clean
 clean: 
 	rm -f *.o x gmock.a gmock_main.a gtest_main.a
+	$(MAKE) -C ../source clean
 
