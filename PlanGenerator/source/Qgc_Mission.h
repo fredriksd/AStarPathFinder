@@ -9,7 +9,7 @@ namespace Qgc
 {
    struct Mission
    {
-      std::uint8_t CruiseSpeed;
+      std::uint8_t cruiseSpeed;
       std::uint8_t firmwareType;
       std::uint8_t hoverSpeed;
    };

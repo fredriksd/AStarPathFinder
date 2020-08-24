@@ -18,14 +18,14 @@ CPPFLAGS += -isystem ${GTEST_DIR}/include -isystem ${GMOCK_DIR}/include
 CXXFLAGS += -g -Wall -Wextra -pthread -std=c++14
 
 .PHONY: x
-x: PlanGeneratorTest.o PlanGenerator.o gmock_main.a
-	g++ ${CXXFLAGS} ${CPPFLAGS} -lpthread $^ -o $@
+x: PlanGeneratorTest.o PlanGenerator.o gtest_main.a gmock_main.a
+	$(CXX) ${CXXFLAGS} ${CPPFLAGS} -lpthread $^ -o $@
 
 PlanGeneratorTest.o: PlanGeneratorTest.cpp
-	g++ -c ${CPPFLAGS} $<
+	$(CXX) -c ${CPPFLAGS} $<
 
 PlanGenerator.o: PlanGenerator.cpp PlanGenerator.h
-	g++ -c ${CPPFLAGS} $<
+	$(CXX) -c ${CPPFLAGS} $<
 
 
 gtest-all.o: $(GTEST_SRCS_)
@@ -37,13 +37,19 @@ gmock-all.o: $(GMOCK_SRCS_)
 gmock_main.o: $(GMOCK_SRCS_)
 	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) -I$(GMOCK_DIR) $(CXXFLAGS) -c $(GMOCK_DIR)/src/gmock_main.cc
 
+gtest_main.o: ${GTEST_SRCS_}
+	$(CXX) ${CPPFLAGS} -I${GTEST_DIR} -I${GMOCK_DIR} ${CXXFLAGS} -c ${GTEST_DIR}/src/gtest_main.cc
+
 gmock.a: gmock-all.o gtest-all.o
 	${AR} ${ARFLAGS} $@ $^
 
 gmock_main.a: gmock-all.o gtest-all.o gmock_main.o
 	${AR} ${ARFLAGS} $@ $^
 
+gtest_main.a: gtest-all.o gtest_main.o
+	${AR} ${ARFLAGS} $@ $^
+
 .PHONY: clean
 clean: 
-	rm -f *.o x gmock.a gmock_main.a
+	rm -f *.o x gmock.a gmock_main.a gtest_main.a
 

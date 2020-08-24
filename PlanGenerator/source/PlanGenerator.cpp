@@ -48,9 +48,10 @@ PathFinder::Util::PlanGenerator::makeMinimumPlan()
 void
 PathFinder::Util::PlanGenerator::addMission(const Qgc::Mission& mission)
 {
-    
+    os_ << "\"mission\": {"
+           "\n \"cruiseSpeed\": " + std::to_string(mission.cruiseSpeed) + ",\"\n"
+           "\n \"firmwareType\": " + std::to_string(mission.firmwareType) + ",\"\n";
 }
-
 
 void
 PathFinder::Util::PlanGenerator::verifyExtension(const std::string& filename)
@@ -71,6 +72,7 @@ PathFinder::Util::PlanGenerator::close()
         os_.close();
     }
 }
+
 
 bool
 PathFinder::Util::PlanGenerator::isOpen()

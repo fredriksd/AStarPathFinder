@@ -19,7 +19,7 @@ def main():
         for j in range(0, rows):
             grid[i][j].addNeigbors(grid, cols, rows)
 
-    start = grid[0][rows - 2]
+    start = grid[0][0]
     start.obstacle = False
     stop = grid[cols - 1][rows - 1]
     stop.obstacle = False
