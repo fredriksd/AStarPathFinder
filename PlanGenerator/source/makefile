@@ -1,4 +1,6 @@
 
+#AR := $(AR.STATIC)
+
 SOURCES = *.cpp
 HEADERS = *.h
 
@@ -12,7 +14,7 @@ CXXFLAGS += -g -Wall -Wextra -pthread -std=c++14
 pkg: PlanGenerator.o
 
 PlanGenerator.o: PlanGenerator.cpp PlanGenerator.h
-	$(CXX) -c ${CPPFLAGS} $<
+	$(strip $(CXX) -c ${CPPFLAGS} $<)
 
 .PHONY: clean
 clean: 
