@@ -1,5 +1,5 @@
 
-#AR := $(AR.STATIC)
+AR := $(AR.static)
 
 .SUFFIXES: 
 
